@@ -1,0 +1,7 @@
+Flask
+Werkzeug
+requests
+tiktoken
+cryptography
+gunicorn
+fpdf
