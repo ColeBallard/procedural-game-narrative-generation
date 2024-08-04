@@ -1,4 +1,4 @@
--- umig9844z7ldflvc.CharacterItems definition
+-- CharacterItems definition
 
 CREATE TABLE `CharacterItems` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -13,9 +13,9 @@ CREATE TABLE `CharacterItems` (
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`character_id`) REFERENCES `Characters`(`id`),
   FOREIGN KEY (`item_id`) REFERENCES `Items`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.CharacterQuests definition
+-- CharacterQuests definition
 
 CREATE TABLE `CharacterQuests` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -30,9 +30,9 @@ CREATE TABLE `CharacterQuests` (
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`character_id`) REFERENCES `Characters`(`id`),
   FOREIGN KEY (`quest_id`) REFERENCES `Quests`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.CharacterRelationships definition
+-- CharacterRelationships definition
 
 CREATE TABLE `CharacterRelationships` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -58,9 +58,9 @@ CREATE TABLE `CharacterRelationships` (
   CHECK (`familiarity` BETWEEN 1 AND 10),
   CHECK (`anger` BETWEEN 1 AND 10),
   CHECK (`fear` BETWEEN 1 AND 10)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.CharacterSkills definition
+-- CharacterSkills definition
 
 CREATE TABLE `CharacterSkills` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -75,9 +75,9 @@ CREATE TABLE `CharacterSkills` (
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`character_id`) REFERENCES `Characters`(`id`),
   FOREIGN KEY (`skill_id`) REFERENCES `Skills`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.CharacterStatuses definition
+-- CharacterStatuses definition
 
 CREATE TABLE `CharacterStatuses` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -92,9 +92,9 @@ CREATE TABLE `CharacterStatuses` (
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`character_id`) REFERENCES `Characters`(`id`),
   FOREIGN KEY (`status_id`) REFERENCES `Statuses`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.Characters definition
+-- Characters definition
 
 CREATE TABLE `Characters` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -120,9 +120,9 @@ CREATE TABLE `Characters` (
   `current_currency` int unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.EventCharacters definition
+-- EventCharacters definition
 
 CREATE TABLE `EventCharacters` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -136,9 +136,9 @@ CREATE TABLE `EventCharacters` (
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`character_id`) REFERENCES `Characters`(`id`),
   FOREIGN KEY (`event_id`) REFERENCES `Events`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.Events definition
+-- Events definition
 
 CREATE TABLE `Events` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -156,9 +156,9 @@ CREATE TABLE `Events` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`location_id`) REFERENCES `Locations`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.Items definition
+-- Items definition
 
 CREATE TABLE `Items` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -170,9 +170,9 @@ CREATE TABLE `Items` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.Locations definition
+-- Locations definition
 
 CREATE TABLE `Locations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -190,9 +190,9 @@ CREATE TABLE `Locations` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`parent_id`) REFERENCES `Locations`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.QuestSteps definition
+-- QuestSteps definition
 
 CREATE TABLE `QuestSteps` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -204,9 +204,9 @@ CREATE TABLE `QuestSteps` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`quest_id`) REFERENCES `Quests`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.Quests definition
+-- Quests definition
 
 CREATE TABLE `Quests` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -223,9 +223,9 @@ CREATE TABLE `Quests` (
   `exp_reward` int unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.Seeds definition
+-- Seeds definition
 
 CREATE TABLE `Seeds` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -234,9 +234,9 @@ CREATE TABLE `Seeds` (
   `current_date_time` datetime DEFAULT NULL,
   `current_turn` int unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.Skills definition
+-- Skills definition
 
 CREATE TABLE `Skills` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -245,9 +245,9 @@ CREATE TABLE `Skills` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.Statuses definition
+-- Statuses definition
 
 CREATE TABLE `Statuses` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -258,9 +258,9 @@ CREATE TABLE `Statuses` (
   `updated_at` datetime DEFAULT NULL,
   `duration` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
--- umig9844z7ldflvc.Steps definition
+-- Steps definition
 
 CREATE TABLE `Steps` (
   `name` varchar(64) DEFAULT NULL,
@@ -271,4 +271,4 @@ CREATE TABLE `Steps` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`location_id`) REFERENCES `Locations`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
