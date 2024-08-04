@@ -1,1 +1,1 @@
-temp1 = ["Prompt {var}"]
+CONDENSE = "Condense the following text to make it more concise:\n\n{}"

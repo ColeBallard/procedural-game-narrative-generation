@@ -25,64 +25,6 @@ $(document).ready(function () {
         saveUserData();
     });
 
-    $('#book-writer-form').on('submit', function (e) {
-        e.preventDefault();
-
-        // Clear previous error messages
-        $('.error').text('');
-
-        // Validation
-        let isValid = true;
-
-        if ($('#book-writer-title').val().trim() === '') {
-            $('#book-writer-title-Error').text('Please enter a title.');
-            isValid = false;
-        }
-
-        if (!isValid) {
-            return; // Stop the function if validation fails
-        }
-
-        prefix = 'book-writer'
-
-        // Show the loading bar
-        $('#' + prefix + '-loading-bar-container').show();
-        $('#' + prefix + '-loading-bar').css('width', '0%');
-        $('#' + prefix + '-loading-percent').text('0%'); // Reset the text
-
-        let formData = gatherFormData();
-        formData['title'] = $('#book-writer-title').val().trim();
-        formData["api_key"] = $("#openai-api-key-input").val();
-
-        $.ajax({
-            type: "POST",
-            url: "/book-writer",
-            contentType: "application/json",
-            data: JSON.stringify(formData),
-            xhr: function () {
-                var xhr = new window.XMLHttpRequest();
-                xhr.upload.addEventListener("progress", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total;
-                        // Update loading bar width
-                        $('#' + prefix + '-loading-bar').css('width', percentComplete * 100 + '%');
-                    }
-                }, false);
-                return xhr;
-            },
-            success: function (response) {
-                console.log("Data submitted successfully:", response);
-            },
-            error: function (xhr, status, error) {
-                console.error("Error in data submission:", xhr.responseText);
-            },
-            complete: function () {
-                // Hide the loading bar when the request is complete
-                updateLoadingBar(formData.title, prefix);
-            }
-        });
-    });
-
 });
 
 function changeTabViews(active_tab, inactive_tabs) {
@@ -103,25 +45,6 @@ function setTabClickEvents(tabs) {
             changeTabViews(tab, other_tabs);
         });
     }
-}
-
-function gatherFormData() {
-    let selectedPromptType = $('#book-writer-prompt-type').val();
-    let formData = {};
-
-    if (selectedPromptType === 'Outline') {
-        let inputData = [];
-        $('#inputContainer').find('.input-group').each(function () {
-            let level = $(this).find('.level-indicator').text();
-            let value = $(this).find('input[type="text"]').val();
-            inputData.push({ value: value, level: level });
-        });
-        formData['outline'] = inputData;
-    } else if (selectedPromptType === 'Summary') {
-        formData['summary'] = $('#summaryTextarea').val().trim();
-    }
-
-    return formData;
 }
 
 function setOpenAIApiKeyLocalStorageItem(value) {
@@ -171,7 +94,7 @@ async function testOpenAIKey() {
     };
 
     const body = JSON.stringify({
-        model: "gpt-3.5-turbo",
+        model: "gpt-4.0-turbo",
         messages: [
             {
                 role: "system",
@@ -196,24 +119,4 @@ async function testOpenAIKey() {
     } catch (error) {
         return { valid: false, message: 'Failed to test API key.', error: error };
     }
-}
-
-// Function to periodically fetch progress and update the loading bar
-function updateLoadingBar(title, prefix) {
-    $.get('/progress', function (data) {
-        if (data.current && data.total) {
-            var progress = (data.current / data.total) * 100;
-            $('#' + prefix + '-loading-bar').css('width', progress + '%');
-            $('#' + prefix + '-loading-percent').text(Math.round(progress) + '%'); // Update the text
-        }
-
-        if (data.complete) {
-            deliverPDF(data.text, title);
-            // Hide the loading bar when processing is complete
-            $('#' + prefix + '-loading-bar-container').hide();
-        }
-        else {
-            setTimeout(() => updateLoadingBar(title, prefix), 1000); // Update every second
-        }
-    });
 }
