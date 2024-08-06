@@ -114,3 +114,20 @@ button {
     text-align: center;
     line-height: 20px;
 }
+
+.scrollable-section {
+    height: 600px; /* Adjust height as needed */
+    overflow-y: auto;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.btn-link {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.btn-link:hover {
+    color: white;
+}

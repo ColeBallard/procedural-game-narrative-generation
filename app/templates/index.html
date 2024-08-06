@@ -7,35 +7,269 @@
 
     <title>Procedural Game Narrative Generation</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col">
                 <h1>Procedural Game Narrative Generation</h1>
             </div>
             <div class="col-auto">
-                <button class="btn btn-primary" id="game-view-btn">Game</button>
-            </div>
-            <div class="col-auto">
-                <button class="btn btn-secondary" id="options-view-btn">Options</button>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button class="btn btn-primary" id="game-view-btn">Game</button>
+                    <button class="btn btn-secondary" id="options-view-btn">Options</button>
+                </div>
             </div>
         </div>
-        <div id="game-view">
-            <div id="game-output"></div>
-            <input id="game-input" name="game-input">
-            <div class="error" id="game-error"></div>
-            <button type="button" class="other-button" id="submit-game-input-btn">Submit</button>
+        <div class="container-fluid" id="game-view">
+            <div class="row">
+                <!-- Left Column: Character Info -->
+                <div class="col-md-2 border border-white rounded scrollable-section">
+                    <h3 class="title">Info</h3>
+                    <div id="infoAccordion">
+                        <!-- Locations Dropdown -->
+                        <div>
+                            <h2 id="headingLocations">
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-bs-target="#collapseLocations" aria-expanded="true"
+                                    aria-controls="collapseLocations">
+                                    Locations
+                                </button>
+                            </h2>
+                            <div id="collapseLocations" class="collapse show"
+                                aria-labelledby="headingLocations" data-bs-parent="#infoAccordion">
+                                <div>
+                                    <!-- Nested accordion for Locations -->
+                                    <div id="locationsAccordion">
+                                        <div>
+                                            <h2 id="headingLocation1">
+                                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                                    data-bs-target="#collapseLocation1" aria-expanded="true"
+                                                    aria-controls="collapseLocation1">
+                                                    Location 1
+                                                </button>
+                                            </h2>
+                                            <div id="collapseLocation1" class="collapse show"
+                                                aria-labelledby="headingLocation1" data-bs-parent="#locationsAccordion">
+                                                <div>
+                                                    Details about Location 1
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h2 id="headingLocation2">
+                                                <button class="btn btn-link collapsed" type="button"
+                                                    data-toggle="collapse" data-bs-target="#collapseLocation2"
+                                                    aria-expanded="false" aria-controls="collapseLocation2">
+                                                    Location 2
+                                                </button>
+                                            </h2>
+                                            <div id="collapseLocation2" class="collapse"
+                                                aria-labelledby="headingLocation2" data-bs-parent="#locationsAccordion">
+                                                <div>
+                                                    Details about Location 2
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h2 id="headingLocation3">
+                                                <button class="btn btn-link collapsed" type="button"
+                                                    data-toggle="collapse" data-bs-target="#collapseLocation3"
+                                                    aria-expanded="false" aria-controls="collapseLocation3">
+                                                    Location 3
+                                                </button>
+                                            </h2>
+                                            <div id="collapseLocation3" class="collapse"
+                                                aria-labelledby="headingLocation3" data-bs-parent="#locationsAccordion">
+                                                <div>
+                                                    Details about Location 3
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Events Dropdown -->
+                        <div>
+                            <h2 id="headingEvents">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-bs-target="#collapseEvents" aria-expanded="false"
+                                    aria-controls="collapseEvents">
+                                    Events
+                                </button>
+                            </h2>
+                            <div id="collapseEvents" class="collapse" aria-labelledby="headingEvents"
+                                data-bs-parent="#infoAccordion">
+                                <div>
+                                    <!-- Nested accordion for Events -->
+                                    <div id="eventsAccordion">
+                                        <div>
+                                            <h2 id="headingEvent1">
+                                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                                    data-bs-target="#collapseEvent1" aria-expanded="true"
+                                                    aria-controls="collapseEvent1">
+                                                    Event 1
+                                                </button>
+                                            </h2>
+                                            <div id="collapseEvent1" class="collapse show"
+                                                aria-labelledby="headingEvent1" data-bs-parent="#eventsAccordion">
+                                                <div>
+                                                    Details about Event 1
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h2 id="headingEvent2">
+                                                <button class="btn btn-link collapsed" type="button"
+                                                    data-toggle="collapse" data-bs-target="#collapseEvent2"
+                                                    aria-expanded="false" aria-controls="collapseEvent2">
+                                                    Event 2
+                                                </button>
+                                            </h2>
+                                            <div id="collapseEvent2" class="collapse"
+                                                aria-labelledby="headingEvent2" data-bs-parent="#eventsAccordion">
+                                                <div>
+                                                    Details about Event 2
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h2 id="headingEvent3">
+                                                <button class="btn btn-link collapsed" type="button"
+                                                    data-toggle="collapse" data-bs-target="#collapseEvent3"
+                                                    aria-expanded="false" aria-controls="collapseEvent3">
+                                                    Event 3
+                                                </button>
+                                            </h2>
+                                            <div id="collapseEvent3" class="collapse"
+                                                aria-labelledby="headingEvent3" data-bs-parent="#eventsAccordion">
+                                                <div>
+                                                    Details about Event 3
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Interacting Characters Dropdown -->
+                        <div>
+                            <h2 id="headingCharacters">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-bs-target="#collapseCharacters" aria-expanded="false"
+                                    aria-controls="collapseCharacters">
+                                    Interacting Characters
+                                </button>
+                            </h2>
+                            <div id="collapseCharacters" class="collapse"
+                                aria-labelledby="headingCharacters" data-bs-parent="#infoAccordion">
+                                <div>
+                                    <!-- Nested accordion for Interacting Characters -->
+                                    <div id="charactersAccordion">
+                                        <div>
+                                            <h2 id="headingCharacter1">
+                                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                                    data-bs-target="#collapseCharacter1" aria-expanded="true"
+                                                    aria-controls="collapseCharacter1">
+                                                    Character 1
+                                                </button>
+                                            </h2>
+                                            <div id="collapseCharacter1" class="collapse show"
+                                                aria-labelledby="headingCharacter1"
+                                                data-bs-parent="#charactersAccordion">
+                                                <div>
+                                                    Details about Character 1
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h2 id="headingCharacter2">
+                                                <button class="btn btn-link collapsed" type="button"
+                                                    data-toggle="collapse" data-bs-target="#collapseCharacter2"
+                                                    aria-expanded="false" aria-controls="collapseCharacter2">
+                                                    Character 2
+                                                </button>
+                                            </h2>
+                                            <div id="collapseCharacter2" class="collapse"
+                                                aria-labelledby="headingCharacter2"
+                                                data-bs-parent="#charactersAccordion">
+                                                <div>
+                                                    Details about Character 2
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h2 id="headingCharacter3">
+                                                <button class="btn btn-link collapsed" type="button"
+                                                    data-toggle="collapse" data-bs-target="#collapseCharacter3"
+                                                    aria-expanded="false" aria-controls="collapseCharacter3">
+                                                    Character 3
+                                                </button>
+                                            </h2>
+                                            <div id="collapseCharacter3" class="collapse"
+                                                aria-labelledby="headingCharacter3"
+                                                data-bs-parent="#charactersAccordion">
+                                                <div>
+                                                    Details about Character 3
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle Column: Main Game Area -->
+                <div class="col-md-6">
+                    <div id="game-output" class="scrollable">
+                        <!-- Narrative content goes here -->
+                    </div>
+                    <div id="user-options">
+                        <!-- Pre-determined options -->
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><button class="btn btn-link">Option 1</button></li>
+                            <li class="nav-item"><button class="btn btn-link">Option 2</button></li>
+                            <!-- More options as needed -->
+                        </ul>
+                        <textarea id="game-input" name="game-input" class="form-control"
+                            placeholder="Type your action..."></textarea>
+                        <button type="button" class="btn btn-primary" id="submit-game-input-btn">Submit</button>
+                    </div>
+                    <div class="error" id="game-error"></div>
+                </div>
+
+                <!-- Right Column: Player Stats and Inventory -->
+                <div class="col-md-4 border border-white rounded">
+                    <h3 class="title">Character</h3>
+                    <div id="player-stats">
+                        <!-- Dynamically updated with player stats -->
+                    </div>
+                    <div id="inventory">
+                        <!-- Player's inventory items listed here -->
+                    </div>
+                    <div id="quests">
+                        <!-- Current quests and objectives -->
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="options-view">
             <ul class="nav nav-tabs">
@@ -53,7 +287,9 @@
                 </li>
             </ul>
             <div class="form-group" id="new-game-view">
-                <div class="input"><span class="input-label">Story Inspiration: </span><textarea class="form-control" id="new-game-inspiration-input" name="new-game-inspiration-input" placeholder="Not required" rows="3"></textarea></div>
+                <div class="input"><span class="input-label">Story Inspiration: </span><textarea class="form-control"
+                        id="new-game-inspiration-input" name="new-game-inspiration-input" placeholder="Not required"
+                        rows="3"></textarea></div>
                 <button type="button" class="submit-button" id="save-api-keys-btn">Create Seed</button>
             </div>
             <div id="load-game-view">
@@ -63,12 +299,19 @@
 
             </div>
             <div id="api-keys-view">
-                <div class="form-group row input"><span class="col-sm-2 col-form-label input-label">OpenAI API Key: </span><input class="col-sm-10" type="password" id="openai-api-key-input" name="openai-api-key-input" placeholder="Required"></div>
-                <div class="form-group row input"><span class="col-sm-2 col-form-label input-label">Groq API Key: </span><input class="col-sm-10" type="password" id="groq-api-key-input" name="groq-api-key-input" placeholder="Required"></div>
+                <div class="form-group row input"><span class="col-sm-2 col-form-label input-label">OpenAI API Key:
+                    </span><input class="col-sm-10" type="password" id="openai-api-key-input"
+                        name="openai-api-key-input" placeholder="Required"></div>
+                <div class="form-group row input"><span class="col-sm-2 col-form-label input-label">Groq API Key:
+                    </span><input class="col-sm-10" type="password" id="groq-api-key-input" name="groq-api-key-input"
+                        placeholder="Required"></div>
                 <button type="button" class="other-button" id="save-api-keys-btn">Save to Local Storage</button>
-                <div id="api-keys-note"><b>Note:</b> This feature is optional and will use your browsers data storage system
-                    to remember your API Keys. We <b>DO NOT</b> store or save your keys anywhere besides your own browser. This 
-                    application uses these text boxes to make API calls. Both API keys are needed for this application to work.
+                <div id="api-keys-note"><b>Note:</b> This feature is optional and will use your browsers data storage
+                    system
+                    to remember your API Keys. We <b>DO NOT</b> store or save your keys anywhere besides your own
+                    browser. This
+                    application uses these text boxes to make API calls. Both API keys are needed for this application
+                    to work.
                 </div>
             </div>
         </div>
