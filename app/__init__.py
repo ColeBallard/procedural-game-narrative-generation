@@ -1,19 +1,19 @@
 import os
-import subprocess
 import yaml
+import logging
+
 from dotenv import load_dotenv
-from flask import Flask
+
+from flask import Flask, current_app
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-import shutil
-import logging
+import openai
+
 from .orm import Base
+from .world_building import WorldBuilding
 
 def createApp():
     app = Flask(__name__, static_folder='static', static_url_path='/static', template_folder='templates')
-    
-    # Configure logging
-    logging.basicConfig(level=logging.DEBUG)
 
     # Load environment variables
     load_dotenv()
@@ -41,6 +41,11 @@ def createApp():
     # Create the SQLAlchemy engine
     engine = create_engine(connection_string)
     Base.metadata.create_all(engine)
+
+    # Setup configuration and other necessary initializations here
+    with app.app_context():
+        current_app.world_builder = None  # Store world_builder in the current_app context
+        current_app.openai = openai
 
     # Create a configured "Session" class
     Session = sessionmaker(bind=engine)

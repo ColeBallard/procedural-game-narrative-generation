@@ -97,9 +97,16 @@ $(document).ready(function () {
 
     async function initializeWorldBuilding(seedId, seedData) {
         const steps = [
-            { action: 'create_locations', text: 'Creating locations...' },
             { action: 'create_main_character', text: 'Creating main character...' },
+            { action: 'create_main_character_skills', text: 'Creating main character skills...' },
+            { action: 'create_main_character_statuses', text: 'Creating main character statuses...' },
+            { action: 'create_locations', text: 'Creating locations...' },
             { action: 'create_surrounding_characters', text: 'Creating surrounding characters...' },
+            { action: 'create_surrounding_character_skills', text: 'Creating surrounding characters skills...' },
+            { action: 'create_surrounding_character_statuses', text: 'Creating surrounding characters statuses...' },
+            { action: 'create_character_relationships', text: 'Creating character relationships...' },
+            { action: 'creating_events', text: 'Creating events...' },
+            { action: 'creating_items', text: 'Creating items...'}
             // Add more steps as needed
         ];
 

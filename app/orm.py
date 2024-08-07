@@ -40,7 +40,7 @@ class Seed(Base):
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now)
     current_date_time = Column(DateTime)
-    current_turn = Column(Integer)
+    current_turn = Column(Integer, default=1)
     characters = relationship('Character', back_populates='seed')
     character_items = relationship('CharacterItem', back_populates='seed')
     quests = relationship('Quest', back_populates='seed')
