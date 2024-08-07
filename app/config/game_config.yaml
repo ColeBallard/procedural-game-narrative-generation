@@ -69,3 +69,18 @@ emotional_attributes:
     - Terrified
     - Horrified
     - Petrified
+
+classes:
+  - Warrior
+  - Mage
+  - Rogue
+  - Healer
+  - Paladin
+  - Ranger
+  - Sorcerer
+  - Bard
+  - Druid
+  - Monk
+  - Necromancer
+  - Barbarian
+  - Assassin

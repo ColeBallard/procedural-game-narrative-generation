@@ -20,20 +20,6 @@ h1 {
     margin-bottom: 8px;
 }
 
-input[type="text"] {
-    margin-top: 15px; /* Space between file upload widget and text input */
-    background-color: #1e1e1e; /* Slightly lighter than body for contrast */
-    color: #fff;
-    border: 1px solid #333;
-    padding: 5px;
-    width: calc(80% - 10px); /* Full width with padding considered */
-}
-
-select {
-    margin-top: 15px;
-    padding: 5px;
-}
-
 button {
     margin-top: 10px;
     padding: 10px 20px;
@@ -130,4 +116,19 @@ button {
 
 .btn-link:hover {
     color: white;
+}
+
+.accordion-button {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    font-weight: bold;
+    text-align: left;
+}
+.accordion-button:focus {
+    box-shadow: none !important;
+}
+.accordion-button::after {
+    display: none;
 }

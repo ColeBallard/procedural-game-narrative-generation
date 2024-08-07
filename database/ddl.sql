@@ -13,7 +13,7 @@ CREATE TABLE `CharacterItems` (
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`character_id`) REFERENCES `Characters`(`id`),
   FOREIGN KEY (`item_id`) REFERENCES `Items`(`id`)
-) 
+); 
 
 -- CharacterQuests definition
 
@@ -30,7 +30,7 @@ CREATE TABLE `CharacterQuests` (
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`character_id`) REFERENCES `Characters`(`id`),
   FOREIGN KEY (`quest_id`) REFERENCES `Quests`(`id`)
-) 
+);
 
 -- CharacterRelationships definition
 
@@ -58,7 +58,7 @@ CREATE TABLE `CharacterRelationships` (
   CHECK (`familiarity` BETWEEN 1 AND 10),
   CHECK (`anger` BETWEEN 1 AND 10),
   CHECK (`fear` BETWEEN 1 AND 10)
-) 
+);
 
 -- CharacterSkills definition
 
@@ -75,7 +75,7 @@ CREATE TABLE `CharacterSkills` (
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`character_id`) REFERENCES `Characters`(`id`),
   FOREIGN KEY (`skill_id`) REFERENCES `Skills`(`id`)
-) 
+); 
 
 -- CharacterStatuses definition
 
@@ -92,7 +92,7 @@ CREATE TABLE `CharacterStatuses` (
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`character_id`) REFERENCES `Characters`(`id`),
   FOREIGN KEY (`status_id`) REFERENCES `Statuses`(`id`)
-) 
+); 
 
 -- Characters definition
 
@@ -120,7 +120,7 @@ CREATE TABLE `Characters` (
   `current_currency` int unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`)
-) 
+); 
 
 -- EventCharacters definition
 
@@ -136,7 +136,7 @@ CREATE TABLE `EventCharacters` (
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`character_id`) REFERENCES `Characters`(`id`),
   FOREIGN KEY (`event_id`) REFERENCES `Events`(`id`)
-) 
+); 
 
 -- Events definition
 
@@ -149,14 +149,14 @@ CREATE TABLE `Events` (
   `type` varchar(64) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `location_id` int NOT NULL,
+  `location_id` int unsigned NOT NULL,
   `end_date_time` datetime DEFAULT NULL,
   `start_turn` int unsigned DEFAULT NULL,
   `end_turn` int unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`location_id`) REFERENCES `Locations`(`id`)
-) 
+); 
 
 -- Items definition
 
@@ -170,7 +170,7 @@ CREATE TABLE `Items` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) 
+); 
 
 -- Locations definition
 
@@ -190,7 +190,7 @@ CREATE TABLE `Locations` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`parent_id`) REFERENCES `Locations`(`id`)
-) 
+); 
 
 -- QuestSteps definition
 
@@ -204,7 +204,7 @@ CREATE TABLE `QuestSteps` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`),
   FOREIGN KEY (`quest_id`) REFERENCES `Quests`(`id`)
-) 
+); 
 
 -- Quests definition
 
@@ -223,7 +223,7 @@ CREATE TABLE `Quests` (
   `exp_reward` int unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`seed_id`) REFERENCES `Seeds`(`id`)
-) 
+); 
 
 -- Seeds definition
 
@@ -234,7 +234,7 @@ CREATE TABLE `Seeds` (
   `current_date_time` datetime DEFAULT NULL,
   `current_turn` int unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) 
+); 
 
 -- Skills definition
 
@@ -245,7 +245,7 @@ CREATE TABLE `Skills` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) 
+); 
 
 -- Statuses definition
 
@@ -258,7 +258,7 @@ CREATE TABLE `Statuses` (
   `updated_at` datetime DEFAULT NULL,
   `duration` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) 
+); 
 
 -- Steps definition
 
@@ -271,4 +271,4 @@ CREATE TABLE `Steps` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`location_id`) REFERENCES `Locations`(`id`)
-) 
+); 

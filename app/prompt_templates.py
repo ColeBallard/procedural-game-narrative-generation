@@ -1,1 +1,2 @@
 CONDENSE = "Condense the following text to make it more concise:\n\n{}"
+WORLD_BUILDING_LOCATIONS = "Generate a list of locations that are all in close proximity based on the following seed data:\n{}\nEach location should include a name, description, longitude, latitude, type, climate, and terrain. Please output to JSON format."

@@ -3,10 +3,11 @@ import subprocess
 import yaml
 from dotenv import load_dotenv
 from flask import Flask
-from mysql.connector import pooling
 from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 import shutil
 import logging
+from .orm import Base
 
 def createApp():
     app = Flask(__name__, static_folder='static', static_url_path='/static', template_folder='templates')
@@ -17,6 +18,14 @@ def createApp():
     # Load environment variables
     load_dotenv()
 
+    # Load YAML configuration
+    config_path = os.path.join(app.root_path, 'config', 'game_config.yaml')
+    with open(config_path, 'r') as config_file:
+        config_data = yaml.safe_load(config_file)
+
+    # Store the configuration in the app config
+    app.config.update(config_data)
+
     # Database configuration
     db_config = {
         "host": os.getenv("DB_HOST"),
@@ -26,18 +35,18 @@ def createApp():
         "port": os.getenv("DB_PORT")
     }
 
-    # Initialize connection pool
-    pool = pooling.MySQLConnectionPool(
-        pool_name = "pgng_pool",
-        pool_size = 5,
-        **db_config
-    )
-
     # Create the connection string
     connection_string = f"mysql+pymysql://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}"
 
     # Create the SQLAlchemy engine
     engine = create_engine(connection_string)
+    Base.metadata.create_all(engine)
+
+    # Create a configured "Session" class
+    Session = sessionmaker(bind=engine)
+
+    # Store the session factory in the app config
+    app.config['SESSION_FACTORY'] = Session
 
     # Register blueprints
     from app.routes import main as main_blueprint
